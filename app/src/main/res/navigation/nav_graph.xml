@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.farooq.lastfm.presentation.home.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/albumInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumInfoFragment"
+        android:name="com.farooq.lastfm.presentation.album_info.AlbumInfoFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_album_info">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SearchArtistFragment"
+        android:name="com.farooq.lastfm.presentation.search.SearchArtistFragment"
+        android:label="@string/search_fragment_label"
+        tools:layout="@layout/fragment_search_artist" />
+    <fragment
+        android:id="@+id/topAlbumsFragment"
+        android:name="com.farooq.lastfm.presentation.top_albums.TopAlbumsFragment"
+        android:label="Top Albums"
+        tools:layout="@layout/fragment_top_albums"/>
+
+    <include
+        app:graph="@navigation/error_graph" />
+    <dialog
+        android:id="@+id/errorSheetFragment2"
+        android:name="com.farooq.core.components.dialog.ErrorSheetFragment"
+        android:label="ErrorSheetFragment" />
+</navigation>
