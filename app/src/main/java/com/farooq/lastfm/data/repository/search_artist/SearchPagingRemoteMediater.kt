@@ -88,7 +88,7 @@ class SearchPagingRemoteMediater(
             }
             return RemoteMediator.MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: HttpException) {
-            return RemoteMediator.MediatorResult.Error(Exception(networkExceptionHandling.execute(exception)))
+            return RemoteMediator.MediatorResult.Error(Exception(networkExceptionHandling.handleMessage(exception)))
         } catch (exception: IOException) {
             return RemoteMediator.MediatorResult.Error(exception)
         } catch (exception: Exception) {

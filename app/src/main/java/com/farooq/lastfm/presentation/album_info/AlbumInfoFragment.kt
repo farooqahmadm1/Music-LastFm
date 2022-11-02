@@ -76,7 +76,7 @@ class AlbumInfoFragment : Fragment() {
                 is AlbumUIState.UpdateAlbum -> binding.bindAlbum(state.album)
                 is AlbumUIState.DeleteAlbumSuccess -> controller.popBackStack()
                 is AlbumUIState.Loading -> binding.progressBar.isVisible = ProgressBarState.Loading == state.progressBarState
-                is AlbumUIState.Error -> findNavController().navigate(R.id.errorSheetFragment2)
+                is AlbumUIState.Error -> findNavController().navigate(R.id.errorSheetFragment)
                 is AlbumUIState.Nothing -> controller.popBackStack()
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

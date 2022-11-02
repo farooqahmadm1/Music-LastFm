@@ -27,9 +27,7 @@ class NetworkExceptionHandling @Inject constructor(val logger: Logger) {
                     e.code() == 401 -> {
                         Resource.Error(UIComponent.Dialog("Session Expired", "your token has been expired please logout"), ErrorType.SESSION_EXPIRED)
                     }
-                    else -> {
-                        getErrorMessage(e.response()?.errorBody())
-                    }
+                    else -> getErrorMessage(e.response()?.errorBody())
                 }
             }
             is ConnectException -> {
@@ -38,12 +36,8 @@ class NetworkExceptionHandling @Inject constructor(val logger: Logger) {
             is SocketTimeoutException -> {
                 Resource.Error(UIComponent.Dialog("Timeout", "Please check your internet connection is down or poor."), ErrorType.TIMEOUT)
             }
-            is IOException -> {
-                Resource.Error(UIComponent.INone(R.string.error_icon_content_description), ErrorType.NETWORK)
-            }
-            else -> {
-                Resource.Error(UIComponent.INone(R.string.error_icon_content_description), ErrorType.UNKNOWN)
-            }
+            is IOException -> Resource.Error(UIComponent.None("Please check your internet connection"), ErrorType.NETWORK)
+            else -> Resource.Error(UIComponent.None("Something went wrong"), ErrorType.UNKNOWN)
         }
     }
 
@@ -61,12 +55,12 @@ class NetworkExceptionHandling @Inject constructor(val logger: Logger) {
                 Resource.Error(UIComponent.None(if (message.length > 400) "Please Try Again" else message), ErrorType.NETWORK)
             }
         } catch (e: Exception) {
-            Resource.Error(UIComponent.INone(R.string.error_icon_content_description), ErrorType.NETWORK)
+            Resource.Error(UIComponent.None("Something wrong happened"), ErrorType.NETWORK)
         }
     }
 
 
-    fun execute(e: Exception): String {
+    fun handleMessage(e: Exception): String {
         logger.log(e.toString())
         return when (e) {
             is HttpException -> {

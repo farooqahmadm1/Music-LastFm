@@ -36,10 +36,8 @@
         android:label="Top Albums"
         tools:layout="@layout/fragment_top_albums"/>
 
-    <include
-        app:graph="@navigation/error_graph" />
     <dialog
-        android:id="@+id/errorSheetFragment2"
+        android:id="@+id/errorSheetFragment"
         android:name="com.farooq.core.components.dialog.ErrorSheetFragment"
         android:label="ErrorSheetFragment" />
 </navigation>

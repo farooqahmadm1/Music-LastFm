@@ -29,7 +29,7 @@ class TopAlbumsPagingSource(
                 nextKey = if (response.topAlbums.attr.page == response.topAlbums.attr.totalPages) null else position + 1
             )
         } catch (e: Exception) {
-            LoadResult.Error(Exception(networkExceptionHandling.execute(e)))
+            LoadResult.Error(Exception(networkExceptionHandling.handleMessage(e)))
         }
     }
 

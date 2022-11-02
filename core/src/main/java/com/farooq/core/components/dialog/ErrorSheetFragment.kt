@@ -19,9 +19,6 @@ const val ARG_MESSAGE = "message_error"
  * A fragment that shows a list of items as a modal bottom sheet.
  *
  * You can show this modal bottom sheet from your activity like this:
- * <pre>
- *    ErrorSheetFragment.newInstance(30).show(supportFragmentManager, "dialog")
- * </pre>
  */
 @AndroidEntryPoint
 class ErrorSheetFragment : BottomSheetDialogFragment() {

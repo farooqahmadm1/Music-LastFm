@@ -8,8 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.farooq.core.domain.ProgressBarState
+import com.farooq.lastfm.R
 import com.farooq.lastfm.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -53,7 +55,7 @@ class HomeFragment : Fragment() {
                     adapter.submitList(it.album)
                 }
                 is HomeUIState.Loading -> binding.progressBar.isVisible = it.progressBarState == ProgressBarState.Loading
-                is HomeUIState.Error -> {}
+                is HomeUIState.Error -> findNavController().navigate(R.id.errorSheetFragment)
                 is HomeUIState.Nothing -> {
                     binding.albumsList.isVisible = false
                     binding.emptyList.isVisible = true
