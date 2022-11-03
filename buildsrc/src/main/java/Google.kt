@@ -48,4 +48,10 @@ object Google {
 
     const val accompanist = "com.google.accompanist:accompanist-flowlayout:0.17.0"
 
+
+    /*
+     * Google Truth for testing
+     */
+    const val truth = "com.google.truth:truth:1.0.1"
+
 }

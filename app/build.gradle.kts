@@ -71,6 +71,8 @@ dependencies {
      */
     implementation(Google.material)
     implementation(Google.gson)
+    testImplementation(Google.truth)
+    androidTestImplementation(Google.truth)
 
 
     /**
@@ -87,6 +89,8 @@ dependencies {
     implementation(Kotlinx.datetime)
     implementation(Kotlinx.coroutinesCore)
     implementation(Kotlinx.coroutinesAndroid)
+    testImplementation(Kotlinx.coroutinesTest)
+    androidTestImplementation(Kotlinx.coroutinesTest)
 
     /**
      * Hilt
@@ -96,31 +100,22 @@ dependencies {
     androidTestImplementation(HiltTest.hiltAndroidTesting)
     kaptAndroidTest(HiltTest.hiltKaptTesting)
 
-
     implementation("androidx.test:core:1.4.0")
+    implementation("androidx.test.ext:junit-ktx:1.1.3")
 
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("junit:junit:4.12")
-
+    testImplementation(Junit.junit4)
     testImplementation("androidx.test.ext:truth:1.4.0")
-    androidTestImplementation("androidx.test.ext:truth:1.4.0")
-
     testImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:runner:1.4.0")
     testImplementation("androidx.test:rules:1.4.0")
+
+    androidTestImplementation(Junit.junit4)
+    androidTestImplementation("androidx.test.ext:truth:1.4.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.4.0")
 
-    testImplementation("com.google.truth:truth:1.0.1")
-    androidTestImplementation("com.google.truth:truth:1.0.1")
 
-    testImplementation(Kotlinx.coroutinesTest)
-    androidTestImplementation(Kotlinx.coroutinesTest)
-
-    implementation("androidx.test.ext:junit-ktx:1.1.3")
-
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     /**
      * retrofit + okhttp3
      */
@@ -140,21 +135,14 @@ dependencies {
      */
     implementation(Coil.coil)
 
+    implementation(Room.kotlin)
+    implementation(Room.runtime)
+    implementation(Room.paging)
+    kapt(Room.compiler)
+    testImplementation(Room.test)
 
-    val room_version = "2.4.3"
-
-    implementation("androidx.room:room-runtime:$room_version")
-//    annotationProcessor("androidx.room:room-compiler:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
-    testImplementation("androidx.room:room-testing:$room_version")
-    implementation("androidx.room:room-paging:$room_version")
-
-    val paging_version = "3.1.1"
-    implementation("androidx.paging:paging-runtime:$paging_version")
-    testImplementation("androidx.paging:paging-common:$paging_version")
+    implementation(Paging.paging)
+    testImplementation(Paging.pagingTest)
 }
 
 
