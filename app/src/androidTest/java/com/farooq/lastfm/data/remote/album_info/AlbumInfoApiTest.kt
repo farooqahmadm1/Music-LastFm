@@ -16,7 +16,6 @@ import javax.inject.Inject
 @RunWith(JUnit4::class)
 class AlbumInfoApiTest {
 
-
     @get:Rule
     val rule = HiltAndroidRule(this)
 
@@ -29,8 +28,8 @@ class AlbumInfoApiTest {
     }
 
     @Test
-    fun successResultFromAlbumInfoApi() = runBlocking{
-        val result  = albumInfoApi.getAlbumInfo("Cherry Vanilla","Bad Girl")
+    fun success_result_room_album_info_api() = runBlocking {
+        val result = albumInfoApi.getAlbumInfo("Cherry Vanilla", "Bad Girl")
         Truth.assertThat("Bad Girl").isEqualTo(result.album.name)
     }
 

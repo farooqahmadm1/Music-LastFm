@@ -1,8 +1,5 @@
 package com.farooq.lastfm.data.local
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.farooq.lastfm.data.local.dao.AlbumInfoDao
@@ -15,7 +12,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -35,9 +31,11 @@ class AlbumInfoDaoTest {
     @Inject
     lateinit var converters: Converters
 
-    @Inject lateinit var dao: AlbumInfoDao
-    @Inject lateinit var db: AppDatabase
+    @Inject
+    lateinit var dao: AlbumInfoDao
 
+    @Inject
+    lateinit var db: AppDatabase
 
     @Before
     fun setUp() {
@@ -45,7 +43,7 @@ class AlbumInfoDaoTest {
     }
 
     @Test
-    fun insertAlbumInfo() = runBlocking {
+    fun success_insert_album_info() = runBlocking {
         val albumInfo = AlbumInfoEntity("test", "artist", emptyList(), emptyList())
         dao.insert(albumInfo)
         val result = dao.getAlbumInfo("test")
@@ -53,7 +51,7 @@ class AlbumInfoDaoTest {
     }
 
     @Test
-    fun getAlbumInfo() = runBlocking {
+    fun success_get_album_info() = runBlocking {
         val albumInfo = AlbumInfoEntity("test", "artist", emptyList(), emptyList())
         dao.insert(albumInfo)
         val result = dao.getAlbumInfo("test")
@@ -61,8 +59,8 @@ class AlbumInfoDaoTest {
     }
 
     @Test
-    fun getAlbumInfoList() = runBlocking {
-        var list :List<AlbumInfoEntity> = emptyList()
+    fun success_get_album_info_list() = runBlocking {
+        var list: List<AlbumInfoEntity> = emptyList()
         dao.insert(AlbumInfoEntity("test1", "artist", emptyList(), emptyList()))
         dao.insert(AlbumInfoEntity("test2", "artist", emptyList(), emptyList()))
         val job = launch {
@@ -76,11 +74,17 @@ class AlbumInfoDaoTest {
     }
 
     @Test
-    fun deleteAlbumInfoList() = runBlocking {
+    fun success_delete_album_info_item() = runBlocking {
         val albumInfo = AlbumInfoEntity("test", "artist", emptyList(), emptyList())
         dao.insert(albumInfo)
         val result = dao.delete("test")
         assertThat(result).isEqualTo(1)
+    }
+
+    @Test
+    fun error_delete_album_info_item() = runBlocking {
+        val result = dao.delete("testfs")
+        assertThat(result).isEqualTo(0)
     }
 
     @After
