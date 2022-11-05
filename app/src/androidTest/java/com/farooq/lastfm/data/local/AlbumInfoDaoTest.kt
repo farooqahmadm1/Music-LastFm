@@ -35,19 +35,13 @@ class AlbumInfoDaoTest {
     @Inject
     lateinit var converters: Converters
 
-    private lateinit var dao: AlbumInfoDao
-    private lateinit var db: AppDatabase
+    @Inject lateinit var dao: AlbumInfoDao
+    @Inject lateinit var db: AppDatabase
 
 
     @Before
     fun setUp() {
         rule.inject()
-
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
-            .addTypeConverter(converters)
-            .build()
-        dao = db.albumInfoDao()
     }
 
     @Test
