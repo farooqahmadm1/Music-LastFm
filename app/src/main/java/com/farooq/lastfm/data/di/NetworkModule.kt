@@ -8,26 +8,24 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides
-    @ActivityRetainedScoped
     fun providesSearchArtistApi(retrofit: Retrofit): SearchArtistApi {
         return retrofit.create(SearchArtistApi::class.java)
     }
 
     @Provides
-    @ActivityRetainedScoped
     fun providesTopAlbumsApi(retrofit: Retrofit): GetTopAlbumsApi {
         return retrofit.create(GetTopAlbumsApi::class.java)
     }
 
     @Provides
-    @ActivityRetainedScoped
     fun providesTopAlbumsInfoApi(retrofit: Retrofit): GetAlbumInfoApi {
         return retrofit.create(GetAlbumInfoApi::class.java)
     }

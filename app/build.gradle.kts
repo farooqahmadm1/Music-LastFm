@@ -143,6 +143,11 @@ dependencies {
 
     implementation(Paging.paging)
     testImplementation(Paging.pagingTest)
+
+
+//    testImplementation("io.mockk:mockk:${mockkVersion}")
+//    testImplementation("io.mockk:mockk-android:${mockkVersion}")
+//    testImplementation("io.mockk:mockk-agent:${mockkVersion}")
 }
 
 
