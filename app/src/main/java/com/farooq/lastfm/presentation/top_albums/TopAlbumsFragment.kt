@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -33,14 +34,7 @@ class TopAlbumsFragment : Fragment() {
 
     private val viewModel by viewModels<TopAlbumsViewModel>()
     private lateinit var adapter : TopAlbumsAdapter
-    private var artistName: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            artistName = requireArguments().getString(ARG_ARTIST).toString()
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTopAlbumsBinding.inflate(inflater, container, false)
@@ -52,7 +46,6 @@ class TopAlbumsFragment : Fragment() {
 
         initAdapter()
 
-        viewModel.onEvent(TopAlbumEvent.GetTopAlbums(artistName))
         viewModel.dataState.onEach { state ->
             when {
                 state.albums != null -> {
