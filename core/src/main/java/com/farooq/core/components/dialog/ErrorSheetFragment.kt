@@ -47,8 +47,8 @@ class ErrorSheetFragment : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        title = requireArguments().getString(ARG_TITLE) ?: ""
-        message = requireArguments().getString(ARG_MESSAGE) ?: ""
+        title = arguments?.getString(ARG_TITLE) ?: ""
+        message = arguments?.getString(ARG_MESSAGE) ?: ""
 
         binding.titleTxt.text = title.ifEmpty { "Oop,s" }
         binding.descTxt.text = message.ifEmpty { "Something went wrong" }
