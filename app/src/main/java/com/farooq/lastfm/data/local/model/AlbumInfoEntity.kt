@@ -2,7 +2,6 @@ package com.farooq.lastfm.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.farooq.lastfm.data.remote.album_info.dto.TracksDto
 
 @Entity(tableName = "album_info_table")
 data class AlbumInfoEntity(
@@ -14,7 +13,7 @@ data class AlbumInfoEntity(
 ) {
 
     data class Image(
-        val text: String
+        val text: String?
     )
 
     data class Track(

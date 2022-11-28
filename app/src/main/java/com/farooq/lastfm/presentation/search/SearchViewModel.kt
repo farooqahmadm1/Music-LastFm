@@ -50,9 +50,9 @@ class SearchViewModel @Inject constructor(
             )
             .onStart { emit(UiAction.Scroll(currentQuery = lastQueryScrolled)) }
 
-        pagingDataFlow = searches
-            .flatMapLatest { searchArtist(queryString = it.query) }
-            .cachedIn(viewModelScope)
+        pagingDataFlow = searches.flatMapLatest {
+            searchArtist(queryString = it.query)
+        }.cachedIn(viewModelScope)
 
         state = combine(searches, queriesScrolled, ::Pair).map { (search, scroll) ->
             UiState(

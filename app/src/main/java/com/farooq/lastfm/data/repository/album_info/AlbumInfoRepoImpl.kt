@@ -4,6 +4,7 @@ import com.farooq.lastfm.data.local.dao.AlbumInfoDao
 import com.farooq.lastfm.data.mapper.toAlbumEntity
 import com.farooq.lastfm.data.mapper.toDomainAlbumInfo
 import com.farooq.lastfm.data.remote.album_info.GetAlbumInfoApi
+import com.farooq.lastfm.domain.model.AlbumInfo
 import com.farooq.lastfm.domain.repository.AlbumInfoRepo
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -24,5 +25,7 @@ class AlbumInfoRepoImpl @Inject constructor(
     }
 
     override suspend fun delete(albumName: String) = dao.delete(albumName)
+
+    override suspend fun insert(albumInfo: AlbumInfo) = dao.insert(albumInfo.toAlbumEntity())
 
 }

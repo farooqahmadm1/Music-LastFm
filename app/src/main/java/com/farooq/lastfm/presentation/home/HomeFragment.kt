@@ -14,8 +14,11 @@ import com.farooq.core.domain.ProgressBarState
 import com.farooq.lastfm.R
 import com.farooq.lastfm.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -62,7 +65,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
-        viewModel.onEvent(HomeEvent.GetAlbums)
     }
 
     override fun onDestroyView() {

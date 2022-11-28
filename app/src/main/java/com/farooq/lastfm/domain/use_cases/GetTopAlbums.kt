@@ -6,7 +6,5 @@ import javax.inject.Inject
 class GetTopAlbums @Inject constructor(
     private val topAlbumsRepo: TopAlbumsRepo
 ) {
-
     operator fun invoke(artistName: String) = topAlbumsRepo.getTopAlbums(artistName)
-
 }

@@ -8,10 +8,8 @@ import com.farooq.core.domain.UIComponent
 import com.farooq.lastfm.domain.model.Album
 import com.farooq.lastfm.domain.use_cases.GetAlbums
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,31 +20,28 @@ class HomeViewModel @Inject constructor(
     private val _state = MutableStateFlow(UIState())
     var state: StateFlow<UIState> = _state
 
-    private val _uiState: MutableStateFlow<HomeUIState> = MutableStateFlow(HomeUIState.Nothing)
+    private val _uiState: StateFlow<HomeUIState> = getAlbums.invoke().mapLatest {
+        HomeUIState.UpdateAlbum(it)
+    }.stateIn(viewModelScope, initialValue = HomeUIState.Nothing, started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 1000))
+
     var uiState: StateFlow<HomeUIState> = _uiState
 
-    fun onEvent(event: HomeEvent) {
-        when (event) {
-            is HomeEvent.GetAlbums -> getAlbums()
-        }
+    init {
+        getAlbums()
     }
 
-    private fun getAlbums() {
-        getAlbums.invoke().onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    if (result.data.isNullOrEmpty()) {
-                        _uiState.value = HomeUIState.Nothing
-                    } else {
-                        _state.value = state.value.copy(album = result.data!!)
-                        _uiState.value = HomeUIState.UpdateAlbum(result.data!!)
-                    }
-                }
-                is Resource.Loading -> _uiState.value = HomeUIState.Loading(result.progressBarState)
-                is Resource.Error -> _uiState.value = HomeUIState.Error(result.uiComponent)
-            }
-        }.launchIn(viewModelScope)
-    }
+//    fun onEvent(event: HomeEvent) {
+//        when (event) {
+//            is HomeEvent.GetAlbums -> getAlbums()
+//        }
+//    }
+//
+//    private fun getAlbums() {
+//        getAlbums.invoke().onEach { result ->
+//            _state.value = state.value.copy(album = result)
+//            _uiState.value = HomeUIState.UpdateAlbum(result)
+//        }.launchIn(viewModelScope)
+//    }
 }
 
 sealed class HomeEvent {
@@ -60,6 +55,7 @@ sealed class HomeUIState {
     object Nothing : HomeUIState()
 }
 
+/*Cache the data*/
 data class UIState(
     val album: List<Album> = emptyList(),
 )

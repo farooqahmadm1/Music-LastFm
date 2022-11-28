@@ -144,10 +144,8 @@ dependencies {
     implementation(Paging.paging)
     testImplementation(Paging.pagingTest)
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1")
 
-//    testImplementation("io.mockk:mockk:${mockkVersion}")
-//    testImplementation("io.mockk:mockk-android:${mockkVersion}")
-//    testImplementation("io.mockk:mockk-agent:${mockkVersion}")
 }
 
 

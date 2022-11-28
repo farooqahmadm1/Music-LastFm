@@ -17,5 +17,4 @@ data class AlbumInfo(
         val duration: Int,
         val name: String,
     )
-
 }

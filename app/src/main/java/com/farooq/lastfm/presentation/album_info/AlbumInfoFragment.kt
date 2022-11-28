@@ -18,7 +18,9 @@ import com.farooq.core.domain.ProgressBarState
 import com.farooq.lastfm.R
 import com.farooq.lastfm.databinding.FragmentAlbumInfoBinding
 import com.farooq.lastfm.domain.model.AlbumInfo
+import com.farooq.lastfm.presentation.MainActivity
 import com.farooq.lastfm.presentation.album_info.adapter.TracksAdapter
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,6 +43,7 @@ class AlbumInfoFragment : Fragment() {
 
 
     private val viewModel by viewModels<AlbumInfoViewModel>()
+
     private lateinit var controller: NavController
     private lateinit var adapter: TracksAdapter
 
@@ -74,7 +77,10 @@ class AlbumInfoFragment : Fragment() {
         viewModel.uiState.onEach { state ->
             when (state) {
                 is AlbumUIState.UpdateAlbum -> binding.bindAlbum(state.album)
-                is AlbumUIState.DeleteAlbumSuccess -> controller.popBackStack()
+                is AlbumUIState.DeleteAlbumSuccess -> {
+                    (requireActivity() as MainActivity).showDeleteAlbumSnackBar(viewModel.dataState.value.album!!)
+                    controller.popBackStack()
+                }
                 is AlbumUIState.Loading -> binding.progressBar.isVisible = ProgressBarState.Loading == state.progressBarState
                 is AlbumUIState.Error -> findNavController().navigate(R.id.errorSheetFragment)
                 is AlbumUIState.Nothing -> controller.popBackStack()

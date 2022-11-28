@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface AlbumInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(albumInfoEntity: AlbumInfoEntity)
+    suspend fun insert(albumInfoEntity: AlbumInfoEntity) : Long
 
     @Query("SELECT * FROM album_info_table WHERE name = :albumName")
     suspend fun getAlbumInfo(albumName: String): AlbumInfoEntity?

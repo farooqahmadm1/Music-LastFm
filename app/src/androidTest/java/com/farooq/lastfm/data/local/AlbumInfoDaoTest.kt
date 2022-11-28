@@ -10,6 +10,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -63,13 +64,7 @@ class AlbumInfoDaoTest {
         var list: List<AlbumInfoEntity> = emptyList()
         dao.insert(AlbumInfoEntity("test1", "artist", emptyList(), emptyList()))
         dao.insert(AlbumInfoEntity("test2", "artist", emptyList(), emptyList()))
-        val job = launch {
-            dao.getAlbums().collectLatest {
-                list = it
-            }
-        }
-        delay(1000)
-        job.cancel()
+        list = dao.getAlbums().first()
         assertThat(list.size).isEqualTo(2)
     }
 
