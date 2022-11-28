@@ -15,7 +15,7 @@ fun AlbumInfoEntity.toDomainAlbumInfo(): AlbumInfo {
 
 fun List<AlbumInfoEntity.Image>?.toDomainImage(): List<AlbumInfo.Image>? {
     return this?.map {
-        AlbumInfo.Image(it.text)
+        AlbumInfo.Image(it.text ?: "")
     }
 }
 
