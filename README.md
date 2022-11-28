@@ -5,5 +5,8 @@
 - ViewBinding
 - Kotlin DSL
 - Retrofit
+- Kotlin Coroutines
 - Room
 - Core Module
+- Unit Test for Room DB
+- Unit Test for Api with hilt
