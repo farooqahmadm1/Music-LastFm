@@ -18,9 +18,8 @@ import com.farooq.core.domain.ProgressBarState
 import com.farooq.lastfm.R
 import com.farooq.lastfm.databinding.FragmentAlbumInfoBinding
 import com.farooq.lastfm.domain.model.AlbumInfo
-import com.farooq.lastfm.presentation.MainActivity
+import com.farooq.lastfm.presentation.main.MainActivity
 import com.farooq.lastfm.presentation.album_info.adapter.TracksAdapter
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

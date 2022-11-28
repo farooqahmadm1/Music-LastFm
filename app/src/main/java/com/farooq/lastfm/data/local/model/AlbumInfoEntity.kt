@@ -13,7 +13,7 @@ data class AlbumInfoEntity(
 ) {
 
     data class Image(
-        val text: String?
+        val text: String
     )
 
     data class Track(

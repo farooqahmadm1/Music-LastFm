@@ -1,4 +1,4 @@
-package com.farooq.lastfm.presentation
+package com.farooq.lastfm.presentation.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
