@@ -1,6 +1,7 @@
 # Music-LastFm
 
 - Clean Architechure
+- Hilt (DI Framework)
 - Paging 3 (Offline + Online and only Online as well)
 - ViewBinding
 - Kotlin DSL
