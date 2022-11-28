@@ -9,5 +9,5 @@
 - Kotlin Coroutines
 - Room
 - Core Module
-- Unit Test for Room DB
-- Unit Test for Api with hilt
+- Test Cases for Room DB
+- Test Cases for Api with hilt
